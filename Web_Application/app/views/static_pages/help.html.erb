@@ -1,0 +1,51 @@
+
+<h1>Help</h1>
+<p>
+<h3> Overview </h3>	
+As an attempt to emulate the use of the system in a real home environment, we have tried to include the most common applications one may find at an average household. Below we try to describe the  different blocks that make up the home infotainment system and how we plan to implement them.
+
+<h4>Sensor Modules</h4>
+
+There will be three subclasses of sensors in the project:
+<ul>
+<li>Environment monitoring sensors: These sensors would include light intensity, temperature, humidity, and noise. The data obtained from the sensors will be periodically updated to the cloud and the user will be able to access the information through LCD and the web application.
+</li>
+
+<li>Gesture-Arm orientation control sensors : The sensors will be deployed on the gesture gloves, so that when a person can perform gestures to control different modules of the system. We will include the muscle sensor, IMU/strain sensor, etc. Using the combination of measurements obtained through these modules we will be determining the user’s arm and hand orientation. This information will serve as an input that goes into controlling the gaming and the drawing system.
+</li>
+
+<li>Health monitoring sensors: These sensors would include heart rate monitor and stress level sensor. As mentioned above these modules will communicate the sensed data to a server on the cloud and the user will be able to monitor his or her physical health via web application and the LCD.
+</li>
+</ul>
+Each of the above mentioned modules would communicate with the central network node via Zigbee.
+
+<h4>Central Network Node</h4>
+This will be a Raspberry Pi based node which accumulates all the information obtained from the wireless sensor network and pushes the data onto the cloud where it becomes accessible to the user remotely. Furthermore, if the user wishes to provide actuation signals to appliances remotely, this node will play the responsibility of the central decimator. The network node will also be responsible for controlling the display and communicating with the Gesture-Orientation sleeve.
+
+<h4>User Interface:</h4>
+<ul>
+<li>Display:
+Since monitoring is one of the goals of the system, we intend to provide a suitable method to display this information. We plan to use an LCD monitor for the purpose of this project. The LCD monitor will act as a local display for the home network. The information provided by the above mentioned sensing modules will be displayed on it. This same monitor will also serve as the display for the gaming environment. 
+</li>
+<li>
+Web Application:
+We propose to develop an Web Application (most probably based on Ruby on Rails) that provides a user, remote access to his or her system. This application will include user authentication. Once a user logs into his or her account, he or she will be provided with the same information that is displayed on the Local Monitor. Furthermore, the online control panel will also allow the user to control a few of the actuators, remotely based on the information obtained from the parameters. 
+</li>
+
+<li>Gaming Module:
+In order to showcase the entertainment capabilities of the system, we propose to develop a game of two player ping pong. The game being played will be displayed on to the local monitor and we plan to control the game through gestures sensed by smart glove and the wearable band.
+</li>
+
+
+<li>
+Art Module: 
+The functionality of the art module is to allow real-time drawing on the LCD display. The orientation of the users arm and the palm along with the trajectory of the finger tip will be used to outline the diagram on the LCD.
+</li>
+
+<li>
+Gesture Control:
+We propose to design and develop a smart glove which could serve as control to the central node based on the user's gestures along with the smart wearable band. Additionally, it would also serve as medium for physically handicapped people to talk to the central node (in the absence of voice actuation).
+</li>
+<ul>
+
+</p>

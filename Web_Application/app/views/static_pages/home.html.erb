@@ -1,0 +1,13 @@
+<div class="center jumbotron">
+  <h1>ARHIS</h1>
+
+  <h2>
+    Welcome to your Home Infotainment system.
+  </h2>
+  <% unless logged_in? %>
+  	<%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
+</div>
+
+<%= link_to image_tag("hex_design.jpeg", alt: "Rails logo", size: "560x300"),
+            'http://rubyonrails.org/', id: "logo_pic" %>

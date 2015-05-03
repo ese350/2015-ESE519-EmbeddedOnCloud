@@ -1,0 +1,104 @@
+
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <p><%= gravatar_for @user %></p>
+      </h1>
+       <%= @user.first_name %> <%= @user.last_name %> <br/>
+      <%= @user.email %><br/>
+      
+    </section>
+  </aside>
+</div>
+
+<script type="text/javascript"></script>
+<script>
+  $(document).ready(function(){
+    auto_refresh();
+    setInterval(auto_refresh, 1000);
+    
+  });
+
+  function auto_refresh(){
+
+    var url = "https://apricot-pudding-2161.herokuapp.com/parameters/<%= @user.first_name %>" ;
+    //var url = "http://localhost:3000/parameters/<%= @user.first_name %>";
+    $.get(url ,function(data, status){
+            temperature_element = /<div id="Temperature">[0-9]+<\/div>/.exec(data);
+            temperature = /\d+/.exec(temperature_element);
+            humidity_element = /<div id="Humidity">[0-9]+<\/div>/.exec(data);
+            humidity = /\d+/.exec(humidity_element);
+            light_element = /<div id="LightIntensity">[0-9]+<\/div>/.exec(data);
+            light = /\d+/.exec(light_element);
+            pulse_element = /<div id="PulseRate">[0-9]+<\/div>/.exec(data);
+            pulse = /\d+/.exec(pulse_element);
+            noise_element = /<div id="NoiseLevel">[0-9]+<\/div>/.exec(data);
+            noise = /\d+/.exec(noise_element);
+            ll_element = /<div id="LightLevel">[0-9]+<\/div>/.exec(data);
+            ll = /\d+/.exec(ll_element);
+            fan_element = /<div id="FanLevel">[0-9]+<\/div>/.exec(data);
+            fan = /\d+/.exec(fan_element);
+
+            $("#temperature").text(temperature);
+            $("#humidity").text(humidity);
+            $("#light_intensity").text(light);
+            $("#pulse_rate").text(pulse);
+            $("#noise_intensity").text(noise);
+            $("#light_level").text(ll);
+            $("#fan_level").text(fan);
+        });
+    
+  }
+
+  function updateLightInput(val) {
+    var url = "https://apricot-pudding-2161.herokuapp.com/update_light/<%= @user.first_name %>/"+val ;
+    //var url = "http://localhost:3000/update_light/<%= @user.first_name %>/"+val;
+    $.get(url);
+  }
+  
+
+  function updateFanInput(val) {
+    var url = "https://apricot-pudding-2161.herokuapp.com/update_fan/<%= @user.first_name %>/"+val ;
+    //var url = "http://localhost:3000/update_fan/<%= @user.first_name %>/"+val;
+    $.get(url);
+  }
+
+  </script>
+  <table style="width:90%">
+    <tr><hr/></tr>
+    <tr>
+      <td><h1> Temperature </h1></td>
+      <td><h1><div id="temperature"></div></h1></td>
+      <td><h1> Lights </h1></td>
+      <td>
+        <form>
+          <input type="range" name="points" min="0" max="9" onchange="updateLightInput(this.value);">
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <td><h1> Light Intensity </h1></td>
+      <td><h1><div id="light_intensity"></div></h1></td>
+      <td><h1> Fan  </td>
+      <td>
+        <form>
+          <input type="range" name="points" min="0" max="9" onchange="updateFanInput(this.value);">
+        </form>
+      </td>
+    </tr>
+    <td>
+    <tr>
+      <td><h1> Humidity</h1></td>
+      <td><h1><div id="humidity"></div></h1></td>
+    </tr>
+    <tr>
+      <td><h1> Pulse Rate </h1></td>
+      <td><h1><div id="pulse_rate"></div></h1></td>
+    </tr>
+    <tr>
+      <td><h1> Noise Level </h1></td>
+      <td><h1><div id="noise_intensity"></div></h1></td>
+    </tr>
+  </table>
+
